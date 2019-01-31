@@ -1,9 +1,14 @@
 function formatHours(hourlyData){
-  // your code here
+  return hourlyData.map(element => {
+    const myDate = new Date(element.time * 1000).getHours();
+    return myDate
+  }) 
 }
 
 function formatFahrenheit(hourlyData){
-  // your code here
+  return hourlyData.map(element => {
+    return element.temperature;
+  })
 }
 
 function generateDataSet(hours, temperatures) {
@@ -36,5 +41,30 @@ function makeRequest(endpoint, canvas) {
   // create config object for chart.js
   // const chartDataset = generateDataSet(formattedHours, formattedTemps)
   // append the chart to the DOM
-  // new Chart(canvas, chartDataset)
+  // new Chart(canvas, chartDataset) 
+  
+  // fetch(endpoint)
+  //   .then(res => res.json())
+  //   .then(json => buildLineGraph(json)); 
+     
+    // function buildLineGraph(json) {
+    //   let hourlyData = json['hourly']['data'] 
+    //     hourlyData.map(element => {
+    //       console.log((element.time * 1000).gethours)
+    //     })
+
+    fetchData()
+    function fetchData() {
+      fetch(endpoint).then(function (response) {
+        response.json().then(function (data) {
+          let hours = formatHours(data['hourly']['data']);
+          console.log(hours);
+          let temperatures = formatFahrenheit(data['hourly']['data']);
+          generateDataSet(hours,temperatures);
+        })
+      })
+    }
+
+
+
 }
