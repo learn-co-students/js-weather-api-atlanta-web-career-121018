@@ -7,4 +7,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // makeRequest fetches to DarkSky and appends the chart to the DOM
   makeRequest(URL, ctx)
+  
 });

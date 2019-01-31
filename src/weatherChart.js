@@ -43,28 +43,16 @@ function makeRequest(endpoint, canvas) {
   // append the chart to the DOM
   // new Chart(canvas, chartDataset) 
   
-  // fetch(endpoint)
-  //   .then(res => res.json())
-  //   .then(json => buildLineGraph(json)); 
-     
-    // function buildLineGraph(json) {
-    //   let hourlyData = json['hourly']['data'] 
-    //     hourlyData.map(element => {
-    //       console.log((element.time * 1000).gethours)
-    //     })
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(buildLineGraph)
 
-    fetchData()
-    function fetchData() {
-      fetch(endpoint).then(function (response) {
-        response.json().then(function (data) {
-          let hours = formatHours(data['hourly']['data']);
-          console.log(hours);
-          let temperatures = formatFahrenheit(data['hourly']['data']);
-          generateDataSet(hours,temperatures);
-        })
-      })
+    function buildLineGraph(data) {
+      let hours = formatHours(data['hourly']['data']);
+      console.log(hours);
+      let temperatures = formatFahrenheit(data['hourly']['data']);
+      const chart = new Chart(canvas, generateDataSet(hours,temperatures));
+      canvas.appendChild(chart);
     }
-
-
 
 }
